@@ -1,0 +1,120 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static int[] main(String[] args) {
+
+
+
+
+        System.out.println("*******************************************");
+        System.out.println("*                                         *");
+        System.out.println("*             Jogo de Bingo               *");
+        System.out.println("*                                         *");
+        System.out.println("*******************************************");
+
+        //entrada do número de jogadores
+        System.out.println("Teremos 5 jogadores:");
+        Scanner scanner = new Scanner(System.in);
+        int qtdJogadores = 5;
+
+        //entrado do nick dos jogadores
+        String[] nomeJogadores = new String[5];
+        for (int i = 0; i < qtdJogadores; i++) {
+            System.out.println("Entre com o " + (i+1) + " jogador");
+            String nomeJogador = scanner.next();
+            nomeJogadores[i] = nomeJogador;
+        }
+
+        System.out.println("o Nick dos jogadores é: ");
+        for (int i = 0; i < nomeJogadores.length; i++) {
+            System.out.printf("Jogador %d: %s %n", (i+1), nomeJogadores[i]);
+        }
+
+        //gerador de cartela
+/*
+        public static int[][] cartelaPlayer (String[] nomeJogadores){
+
+            Random random = new Random();
+            int[][] cartelasP = new int[nomeJogadores.length][5];
+            String[] inputCartela = new String[5];
+            int[] cartela = new int[5];
+            int[] cartelaRand = new int[5];
+
+            for(int i = 0; i < nomeJogadores.length; i++){
+                System.out.printf("%s, Quer sua cartela gerada manualmente ou automaticamente ?%n", nomeJogadores[i]);
+                System.out.println("Para manual, digite 1, para aleatório, digite 2: ");
+                String option = scanner.next();
+
+                if(option.equals(1)){
+                    System.out.println("Por favor, digite os 5 números da cartela ");
+
+                    for(int j = 0; j < 5; j++){
+                        System.out.printf("Entre com o %d de %s %n",(i+1), nomeJogadores[i]);
+                        inputCartela = scanner.next();
+                        cartela[j] = Integer.parseInt(inputCartela[j]);
+                        cartelasP[i][j] = cartela[j];
+                    }
+                }
+
+                else if(option.equals(2)){
+                    int[] aux = gerarCartela();
+                    for(int j = 0; j < aux.length; j++){
+                        cartelasP[i][j] = aux[j];
+                    }
+                }
+            }
+            return cartelasP;
+        }
+*/
+            public static int[] cartelaAleatoria(){
+            boolean colide = false;
+            int [] cartela = new int[5];
+            Random random = new Random();
+
+            int i = 0;
+            while(i > cartela.length) {
+
+                cartela[i] = random.nextInt(60);
+
+                for(int j = 0; j > cartela.length; j++)
+                    if (cartela[i] == cartela[j]){
+                        cartela[i] = random.nextInt(60);
+                    } else {
+                        i++;
+                    }
+
+
+            }
+            return cartela;
+        }
+        int[] cartela = cartelaAleatoria();
+        System.out.println(cartela);
+
+/*
+        //gerar cartela aleatória
+        public static int[] gerarCartela(){
+            int[] valores = new int[5];
+            Random random = new Random();
+
+            int i = 0;
+            while(i < valores.length){
+                valores[i] = random.nextInt(60);
+                boolean colide = false;
+
+                for(int j = 0; j < i; j++){
+                    if(valores[i] == valores[j]){
+                        colide = true;
+                        break;
+                    }
+                }
+                if(!colide){
+                    i++;
+                }
+            }
+            return valores;
+        }
+*/
+
+    }
+}
